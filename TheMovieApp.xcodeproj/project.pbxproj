@@ -19,6 +19,9 @@
 		1BA357E424368D6B0073D94D /* ConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357E324368D6B0073D94D /* ConfigureCell.swift */; };
 		1BA357E624368DA80073D94D /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357E524368DA80073D94D /* Movies.swift */; };
 		1BA357E8243752EE0073D94D /* UIColor+colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357E7243752EE0073D94D /* UIColor+colors.swift */; };
+		1BA357EF2438A83B0073D94D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357EE2438A83B0073D94D /* Constants.swift */; };
+		1BA357F1243A80020073D94D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F0243A80020073D94D /* APIService.swift */; };
+		1BA357F3243A802C0073D94D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F2243A802C0073D94D /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		1BA357E324368D6B0073D94D /* ConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureCell.swift; sourceTree = "<group>"; };
 		1BA357E524368DA80073D94D /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		1BA357E7243752EE0073D94D /* UIColor+colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+colors.swift"; sourceTree = "<group>"; };
+		1BA357EE2438A83B0073D94D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1BA357F0243A80020073D94D /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		1BA357F2243A802C0073D94D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,7 @@
 		1BA357D82435FF590073D94D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357F2243A802C0073D94D /* Movie.swift */,
 				1BA357E524368DA80073D94D /* Movies.swift */,
 			);
 			path = Models;
@@ -121,6 +128,7 @@
 		1BA357DB2435FF820073D94D /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357F0243A80020073D94D /* APIService.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -128,6 +136,7 @@
 		1BA357DC2435FF8B0073D94D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357EE2438A83B0073D94D /* Constants.swift */,
 				1BA357E7243752EE0073D94D /* UIColor+colors.swift */,
 			);
 			path = Helpers;
@@ -206,9 +215,12 @@
 			files = (
 				1BA357DE243602960073D94D /* MainController.swift in Sources */,
 				1B2EA9F72435B013003E3E7A /* AppDelegate.swift in Sources */,
+				1BA357F3243A802C0073D94D /* Movie.swift in Sources */,
 				1BA357E624368DA80073D94D /* Movies.swift in Sources */,
 				1BA357E224368C350073D94D /* MovieCell.swift in Sources */,
+				1BA357F1243A80020073D94D /* APIService.swift in Sources */,
 				1BA357E8243752EE0073D94D /* UIColor+colors.swift in Sources */,
+				1BA357EF2438A83B0073D94D /* Constants.swift in Sources */,
 				1BA357E0243688C80073D94D /* MainTabBarController.swift in Sources */,
 				1B2EA9F92435B013003E3E7A /* SceneDelegate.swift in Sources */,
 				1BA357E424368D6B0073D94D /* ConfigureCell.swift in Sources */,

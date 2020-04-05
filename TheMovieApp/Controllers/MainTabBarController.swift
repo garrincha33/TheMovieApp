@@ -7,25 +7,23 @@
 //
 
 import UIKit
-
-//step 4 create a main tab bar controller
 class MainTabBarController: UITabBarController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //step 9 set color and call functions
         view.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         setupNavBarControllerCustom()
         setupTabBarController()
     }
- //step 8 setup large titles
+
     private func setupNavBarControllerCustom() {
         
         UINavigationBar.appearance().prefersLargeTitles = true
         
     }
+    
+    
 
-    //step 7 setup tab bar controller with function
     private func setupTabBarController() {
         viewControllers = [
             setupNavigationControllers(with: MainController(), title: "Movies", image: #imageLiteral(resourceName: "movieFeature")),
@@ -34,10 +32,14 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
         ]
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
         tabBar.barTintColor = .clear
+        //step 6 adjust tab items and remove text
+        guard let items = tabBar.items else {return}
+               for item in items {
+                   item.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -4, right: 0)
+               }
 
     }
 
-    //step 5 setup naviation creating function
     private func setupNavigationControllers(with rootViewController: UIViewController, title: String, image: UIImage) -> UINavigationController {
         let navController = UINavigationController(rootViewController: rootViewController)
         rootViewController.title = title
@@ -52,7 +54,6 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
 
 }
 
-//step 6 setup swift UI preview
 import SwiftUI
 struct MainPreviews: PreviewProvider {
     static var previews: some View {
