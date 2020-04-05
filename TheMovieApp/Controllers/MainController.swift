@@ -8,23 +8,34 @@
 
 import UIKit
 
-//step 1 create a main controller and import assets and helper
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+    var movies = [Movies]()
     
-    //step 13 create a dummy item
-    let items = Movies(title: "test", id: 2)
-    
+    //step 1 create am arrary of items
+    let items = [
+
+        Movies(title: "test", id: 1),
+        Movies(title: "two", id: 2),
+        Movies(title: "three", id: 3),
+        Movies(title: "four", id: 4),
+        Movies(title: "four", id: 4),
+        Movies(title: "four", id: 4),
+        Movies(title: "four", id: 4),
+        Movies(title: "four", id: 4),
+        Movies(title: "four", id: 4)
+
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //step 2 give background color
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
+        
+        getMovies()
 
     }
-    
-    //step 2 super.init
+
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
@@ -32,22 +43,22 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //step 14 number of items just return 1 for now
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 1
+        return items.count
         
     }
-    //step 15 set cell size you need flow delegate
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return .init(width: 50, height: 50)
+        //step 5 make it look more like a cell
+        return .init(width: view.frame.width, height: 250)
         
     }
-    
-    //step 16 create func to create cell
-    func configure<T: ConfigureCell>(_ cellType: T.Type, with app: Movies, for indexPath: IndexPath) -> T {
+
+    //step 2 change to array of movies
+    func configure<T: ConfigureCell>(_ cellType: T.Type, with app: [Movies], for indexPath: IndexPath) -> T {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
             fatalError("Unable to dequeue \(cellType)")
         }
@@ -56,15 +67,30 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return cell
     }
 
-     //step 17 return your cell in cell for item
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         return configure(MovieCell.self, with: items, for: indexPath)
         
     }
-}
+    //step 10 create api service function and call in view did load
+    private func getMovies() {
+        APIService.shared.fetchMovies(completionHandler: { (movie, err) in
+            
+            if let err = err {
+                print("unable to getch mopvies",err)
+            }
+            guard let movies = movie else {return}
+            for m in movies {
+                print("these are you movies \(m.title ?? "")")
+                }
+            })
+        }
+    }
+    
+    
+    
 
-//step 6 setup swift UI preview
+
 import SwiftUI
 struct MainPreview: PreviewProvider {
     static var previews: some View {

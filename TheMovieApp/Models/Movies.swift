@@ -8,11 +8,15 @@
 
 import UIKit
 
-//step 10 create modoel
-
-struct Movies {
+struct Movies: Codable {
     
     var title: String? = "TESTTTTTTT"
     var id: Int?
     
+}
+
+//step 9 add another stuct to store an array of the results
+struct MoviesAPI: Codable, Hashable {
+    let page: Int
+    let results: [Movie]
 }

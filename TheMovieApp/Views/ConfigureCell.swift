@@ -8,9 +8,8 @@
 
 import Foundation
 
-//step 12 create configure cell protocol
-
+//step 2 change to arrary opf movies
 protocol ConfigureCell {
     static var reuseIdentifer: String { get }
-    func configure(with movie: Movies)
+    func configure(with movie: [Movies])
 }
