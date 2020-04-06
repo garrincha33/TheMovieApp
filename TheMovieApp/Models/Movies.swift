@@ -15,7 +15,6 @@ struct Movies: Codable {
     
 }
 
-//step 9 add another stuct to store an array of the results
 struct MoviesAPI: Codable, Hashable {
     let page: Int
     let results: [Movie]

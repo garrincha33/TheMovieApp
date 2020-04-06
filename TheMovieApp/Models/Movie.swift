@@ -7,9 +7,6 @@
 //
 
 import Foundation
-
-//step 8 add main api call, this should match the movevie DB results exactly
-
 //this struct will always be the attibutes you are trying to access within the JSON
 // if there is a [Results] array holding these, create a 2nd struct conforming to COdable
 struct Movie: Codable, Hashable {

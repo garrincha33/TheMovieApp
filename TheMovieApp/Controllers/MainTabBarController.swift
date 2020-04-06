@@ -32,7 +32,7 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
         ]
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
         tabBar.barTintColor = .clear
-        //step 6 adjust tab items and remove text
+
         guard let items = tabBar.items else {return}
                for item in items {
                    item.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -4, right: 0)

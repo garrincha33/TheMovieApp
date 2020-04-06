@@ -9,11 +9,17 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell, ConfigureCell {
+    
+    //step 4 create an observer
+    var item: Movie! {
+        didSet {
+            lable.text = item.title
+        }
+    }
 
     static var reuseIdentifer: String = "MovieCell"
 
     let lable = UILabel()
-    //step 3 add image view for testing
     let imageView = UIImageView()
 
     override init(frame: CGRect) {
@@ -23,10 +29,8 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         lable.font = UIFont.boldSystemFont(ofSize: 14)
         
         imageView.backgroundColor = .red
-        
-        
-        //step 3 add image view for testing
-        let stackView = UIStackView(arrangedSubviews: [imageView])
+
+        let stackView = UIStackView(arrangedSubviews: [lable, imageView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -44,11 +48,9 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
     
     }
     
-    func configure(with movie: [Movies]) {
-        //step 4 loop through items. using model as a test
-        for movies in movie {
-            
-            lable.text = movies.title
+    func configure(with movie: [Movie]) {
+        for m in movie {
+            lable.text = m.title
         }
      }
 
