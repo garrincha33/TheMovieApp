@@ -9,8 +9,7 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell, ConfigureCell {
-    
-    //step 4 create an observer
+
     var item: Movie! {
         didSet {
             lable.text = item.title
