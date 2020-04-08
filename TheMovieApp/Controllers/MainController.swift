@@ -10,11 +10,8 @@ import UIKit
 
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    //step 1 create movie array
     var movies = [Movie]()
 
-    
-    
 //    let items = [
 //
 //        Movies(title: "test", id: 1),
@@ -57,8 +54,6 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return .init(width: view.frame.width, height: 250)
         
     }
-
-    //step 2 comment out for now
     
 //    func configure<T: ConfigureCell>(_ cellType: T.Type, with app: [Movie], for indexPath: IndexPath) -> T {
 //        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
@@ -71,8 +66,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //    }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        //step 5 comment out configure to test cell rendering
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
         cell.item = movies[indexPath.row]
         return cell
@@ -88,7 +82,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
             if let err = err {
                 print("unable to getch mopvies",err)
             }
-//step 3 add movies array to call
+
             guard let moviess = movie else {return}
             for _ in moviess {
                 self.movies = moviess
