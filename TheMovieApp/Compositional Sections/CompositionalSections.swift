@@ -6,8 +6,6 @@
 //  Copyright © 2020 twisted echo. All rights reserved.
 //
 
-
-// step 1 create a new group and controller create an enum of sections
 import UIKit
 
 extension MainController {
@@ -16,7 +14,6 @@ extension MainController {
         case bottomSection
     }
 
-// step 2 create top section
 static func topSection() -> NSCollectionLayoutSection {
     let items = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
     items.contentInsets.bottom = 16
@@ -28,7 +25,6 @@ static func topSection() -> NSCollectionLayoutSection {
     return section
 }
 
-    // step 3 create bottom section
 static func bottomSection() -> NSCollectionLayoutSection {
     let items = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1/2)))
     items.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 32)
