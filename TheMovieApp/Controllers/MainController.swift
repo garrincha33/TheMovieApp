@@ -12,31 +12,28 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     var movies = [Movie]()
 
-//    let items = [
-//
-//        Movies(title: "test", id: 1),
-//        Movies(title: "two", id: 2),
-//        Movies(title: "three", id: 3),
-//        Movies(title: "four", id: 4),
-//        Movies(title: "four", id: 4),
-//        Movies(title: "four", id: 4),
-//        Movies(title: "four", id: 4),
-//        Movies(title: "four", id: 4),
-//        Movies(title: "four", id: 4)
-//
-//    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
-        
+        navigationItem.title = "Movies Out Now"
+        navigationController?.navigationBar.prefersLargeTitles = true
         getMovies()
 
     }
 
     init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        //MARK:- compostional layout
+        // step 4 add comp layout
+        let layout = UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
+            
+            if sectionNumber == 0 {
+                return MainController.topSection()
+            } else {
+                return MainController.bottomSection()
+            }
+        }
+        super.init(collectionViewLayout: layout)
     }
     
     required init?(coder: NSCoder) {
