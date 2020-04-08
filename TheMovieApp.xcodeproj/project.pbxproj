@@ -22,6 +22,8 @@
 		1BA357EF2438A83B0073D94D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357EE2438A83B0073D94D /* Constants.swift */; };
 		1BA357F1243A80020073D94D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F0243A80020073D94D /* APIService.swift */; };
 		1BA357F3243A802C0073D94D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F2243A802C0073D94D /* Movie.swift */; };
+		1BA357F8243DF92A0073D94D /* CompositionalSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F7243DF92A0073D94D /* CompositionalSections.swift */; };
+		1BA357FA243E06100073D94D /* TopRatedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		1BA357EE2438A83B0073D94D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1BA357F0243A80020073D94D /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1BA357F2243A802C0073D94D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		1BA357F7243DF92A0073D94D /* CompositionalSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalSections.swift; sourceTree = "<group>"; };
+		1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 		1B2EA9F52435B013003E3E7A /* TheMovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357F6243DF72C0073D94D /* Compositional Sections */,
 				1BA357DC2435FF8B0073D94D /* Helpers */,
 				1BA357DB2435FF820073D94D /* APIService */,
 				1BA357DA2435FF7A0073D94D /* Controllers */,
@@ -111,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				1BA357E124368C350073D94D /* MovieCell.swift */,
+				1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */,
 				1BA357E324368D6B0073D94D /* ConfigureCell.swift */,
 			);
 			path = Views;
@@ -140,6 +146,14 @@
 				1BA357E7243752EE0073D94D /* UIColor+colors.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1BA357F6243DF72C0073D94D /* Compositional Sections */ = {
+			isa = PBXGroup;
+			children = (
+				1BA357F7243DF92A0073D94D /* CompositionalSections.swift */,
+			);
+			path = "Compositional Sections";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA357DE243602960073D94D /* MainController.swift in Sources */,
+				1BA357FA243E06100073D94D /* TopRatedMovieCell.swift in Sources */,
 				1B2EA9F72435B013003E3E7A /* AppDelegate.swift in Sources */,
 				1BA357F3243A802C0073D94D /* Movie.swift in Sources */,
 				1BA357E624368DA80073D94D /* Movies.swift in Sources */,
@@ -221,6 +236,7 @@
 				1BA357F1243A80020073D94D /* APIService.swift in Sources */,
 				1BA357E8243752EE0073D94D /* UIColor+colors.swift in Sources */,
 				1BA357EF2438A83B0073D94D /* Constants.swift in Sources */,
+				1BA357F8243DF92A0073D94D /* CompositionalSections.swift in Sources */,
 				1BA357E0243688C80073D94D /* MainTabBarController.swift in Sources */,
 				1B2EA9F92435B013003E3E7A /* SceneDelegate.swift in Sources */,
 				1BA357E424368D6B0073D94D /* ConfigureCell.swift in Sources */,
