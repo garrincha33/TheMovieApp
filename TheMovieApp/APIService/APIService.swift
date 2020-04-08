@@ -8,7 +8,6 @@
 
 import Foundation
 
-//step 7 add API service 
 class APIService {
     
     static let shared = APIService()

@@ -11,20 +11,24 @@ import UIKit
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var movies = [Movie]()
+    var topMovies = [Movie]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
+        //step 2 register cell
+        collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
         navigationItem.title = "Movies Out Now"
         navigationController?.navigationBar.prefersLargeTitles = true
         getMovies()
+        //Step 4 call function
+        getTopMovies()
 
     }
 
     init() {
         //MARK:- compostional layout
-        // step 4 add comp layout
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
             
             if sectionNumber == 0 {
@@ -67,8 +71,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
         cell.item = movies[indexPath.row]
         return cell
-        
-        
+
         //return configure(MovieCell.self, with: movies, for: indexPath)
         
     }
@@ -89,7 +92,26 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 }
             })
         }
+    
+    //Step 3 call api to test
+    private func getTopMovies() {
+    APIService.shared.fetchMoviesTop(completionHandler: { (movie, err) in
+        
+        if let err = err {
+            print("unable to getch mopvies",err)
+        }
+
+        guard let moviess = movie else {return}
+        for m in moviess {
+            print(m.title ?? "")
+            self.topMovies = moviess
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                }
+            }
+        })
     }
+}
     
 
 
