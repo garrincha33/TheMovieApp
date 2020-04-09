@@ -5,9 +5,6 @@
 //  Created by Richard Price on 08/04/2020.
 //  Copyright © 2020 twisted echo. All rights reserved.
 //
-//Step 1 create a top rated movie cell
-
-
 import UIKit
 
 class TopRatedMovieCell: UICollectionViewCell, ConfigureCell {
@@ -44,7 +41,7 @@ class TopRatedMovieCell: UICollectionViewCell, ConfigureCell {
     
     
     
-    func configure(with movie: [Movie]) {
+    func configure(with movie: Movie) {
         //TODO:-
         
         

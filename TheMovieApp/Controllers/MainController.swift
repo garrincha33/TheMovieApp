@@ -10,27 +10,25 @@ import UIKit
 
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var movies = [Movie]()
-    var topMovies = [Movie]()
+   // var movies = [Movie]()
+//    var topMovies = [Movie]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
-        //step 2 register cell
         collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-        navigationItem.title = "Movies Out Now"
+       // navigationItem.title = "Movies Out Now"
         navigationController?.navigationBar.prefersLargeTitles = true
-        getMovies()
-        //Step 4 call function
-        getTopMovies()
+        //getMovies()
+        setupDiffableDataSource()
+
 
     }
 
     init() {
         //MARK:- compostional layout
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
-            
             if sectionNumber == 0 {
                 return MainController.topSection()
             } else {
@@ -44,78 +42,104 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return movies.count
-        
-    }
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//
+//        return movies.count
+//
+//    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return .init(width: view.frame.width, height: 250)
+        return .init(width: view.frame.width, height: 200)
         
     }
-    
-//    func configure<T: ConfigureCell>(_ cellType: T.Type, with app: [Movie], for indexPath: IndexPath) -> T {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
-//            fatalError("Unable to dequeue \(cellType)")
+    //step 1 un comment ready for use
+    func configure<T: ConfigureCell>(_ cellType: T.Type, with app: Movie, for indexPath: IndexPath) -> T {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
+            fatalError("Unable to dequeue \(cellType)")
+        }
+        cell.configure(with: app)
+        return cell
+    }
+
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 //
-//        }
-//
-//        cell.configure(with: app)
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
+//        cell.item = movies[indexPath.row]
 //        return cell
+//
+//        //return configure(MovieCell.self, with: movies, for: indexPath)
+//
 //    }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
-        cell.item = movies[indexPath.row]
-        return cell
-
-        //return configure(MovieCell.self, with: movies, for: indexPath)
+//    private func getMovies() {
+//        APIService.shared.fetchMovies(completionHandler: { (movie, err) in
+//
+//            if let err = err {
+//                print("unable to getch mopvies",err)
+//            }
+//
+//            guard let moviess = movie else {return}
+//            for _ in moviess {
+//                self.movies = moviess
+//                DispatchQueue.main.async {
+//                    self.collectionView.reloadData()
+//                    }
+//                }
+//            })
+//        }
+    
+    //step 2 use a lazy var setup diffable datasource
+    //MARK:- steup diffable datasource
+    lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, AnyHashable> = .init(collectionView: collectionView) {(collectionView, indexPath, object) -> UICollectionViewCell? in
         
-    }
-
-    private func getMovies() {
-        APIService.shared.fetchMovies(completionHandler: { (movie, err) in
-            
-            if let err = err {
-                print("unable to getch mopvies",err)
-            }
-
-            guard let moviess = movie else {return}
-            for _ in moviess {
-                self.movies = moviess
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    }
+        if let obj = object as? Movie {
+            //step 3 switch on the section
+            switch indexPath.section {
+            case 0:
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
+                cell.configure(with: obj)
+                return cell
+                //BOTTOM SECTION
+            case 1:
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TopRatedMovieCell.reuseIdentifer, for: indexPath) as! TopRatedMovieCell
+                cell.configure(with: obj)
+                return cell
+            default:
+                
+                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
+                cell.configure(with: obj)
+                return cell
+                
                 }
-            })
+            }
+        return nil
         }
     
-    //Step 3 call api to test
-    private func getTopMovies() {
-    APIService.shared.fetchMoviesTop(completionHandler: { (movie, err) in
+    //step 4 setup function with diff data source
+    private func setupDiffableDataSource() {
+        collectionView.dataSource = diffableDataSource
         
-        if let err = err {
-            print("unable to getch mopvies",err)
-        }
+        //MARK:- SetupHeader under Compositional Sections Extension
+        //setupHeader()
+        
+        APIService.shared.fetchMovies { (movies, err) in
 
-        guard let moviess = movie else {return}
-        for m in moviess {
-            print(m.title ?? "")
-            self.topMovies = moviess
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                }
+            APIService.shared.fetchTopMovies { (movieGroup, err) in
+                
+                var snapshot = self.diffableDataSource.snapshot()
+                snapshot.appendSections([.topSection])
+                snapshot.appendItems(movies ?? [], toSection: .topSection)
+                //step 5 change to point at movieAPI which includes results
+                snapshot.appendSections([.bottomSection])
+                let objects = movieGroup?.results ?? []
+                snapshot.appendItems(objects, toSection: .bottomSection)
+                
+                self.diffableDataSource.apply(snapshot)
             }
-        })
+        }
     }
 }
-    
-
-
-
 
 import SwiftUI
 struct MainPreview: PreviewProvider {
