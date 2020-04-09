@@ -24,6 +24,7 @@
 		1BA357F3243A802C0073D94D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F2243A802C0073D94D /* Movie.swift */; };
 		1BA357F8243DF92A0073D94D /* CompositionalSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F7243DF92A0073D94D /* CompositionalSections.swift */; };
 		1BA357FA243E06100073D94D /* TopRatedMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */; };
+		1BA357FC243F36310073D94D /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA357FB243F36310073D94D /* SectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		1BA357F2243A802C0073D94D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		1BA357F7243DF92A0073D94D /* CompositionalSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalSections.swift; sourceTree = "<group>"; };
 		1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRatedMovieCell.swift; sourceTree = "<group>"; };
+		1BA357FB243F36310073D94D /* SectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		1BA357F6243DF72C0073D94D /* Compositional Sections */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357FB243F36310073D94D /* SectionHeader.swift */,
 				1BA357F7243DF92A0073D94D /* CompositionalSections.swift */,
 			);
 			path = "Compositional Sections";
@@ -229,6 +232,7 @@
 			files = (
 				1BA357DE243602960073D94D /* MainController.swift in Sources */,
 				1BA357FA243E06100073D94D /* TopRatedMovieCell.swift in Sources */,
+				1BA357FC243F36310073D94D /* SectionHeader.swift in Sources */,
 				1B2EA9F72435B013003E3E7A /* AppDelegate.swift in Sources */,
 				1BA357F3243A802C0073D94D /* Movie.swift in Sources */,
 				1BA357E624368DA80073D94D /* Movies.swift in Sources */,
