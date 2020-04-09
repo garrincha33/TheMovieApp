@@ -18,10 +18,13 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
         collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-       // navigationItem.title = "Movies Out Now"
+        navigationItem.title = "Movies Out Now"
         navigationController?.navigationBar.prefersLargeTitles = true
         //getMovies()
         setupDiffableDataSource()
+        
+        //HEADER  //step 4 register the header
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
 
 
     }
@@ -48,12 +51,11 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //
 //    }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        return .init(width: view.frame.width, height: 200)
-        
-    }
-    //step 1 un comment ready for use
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return .init(width: view.frame.width, height: 100)
+//
+//    }
     func configure<T: ConfigureCell>(_ cellType: T.Type, with app: Movie, for indexPath: IndexPath) -> T {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
             fatalError("Unable to dequeue \(cellType)")
@@ -88,13 +90,11 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //                }
 //            })
 //        }
-    
-    //step 2 use a lazy var setup diffable datasource
+  
     //MARK:- steup diffable datasource
     lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, AnyHashable> = .init(collectionView: collectionView) {(collectionView, indexPath, object) -> UICollectionViewCell? in
         
         if let obj = object as? Movie {
-            //step 3 switch on the section
             switch indexPath.section {
             case 0:
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
@@ -116,12 +116,11 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return nil
         }
     
-    //step 4 setup function with diff data source
     private func setupDiffableDataSource() {
         collectionView.dataSource = diffableDataSource
-        
+        //step 5 call in setup of data source
         //MARK:- SetupHeader under Compositional Sections Extension
-        //setupHeader()
+        setupHeader()
         
         APIService.shared.fetchMovies { (movies, err) in
 
@@ -130,7 +129,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 var snapshot = self.diffableDataSource.snapshot()
                 snapshot.appendSections([.topSection])
                 snapshot.appendItems(movies ?? [], toSection: .topSection)
-                //step 5 change to point at movieAPI which includes results
+
                 snapshot.appendSections([.bottomSection])
                 let objects = movieGroup?.results ?? []
                 snapshot.appendItems(objects, toSection: .bottomSection)
