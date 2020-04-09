@@ -29,7 +29,7 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         
         imageView.backgroundColor = .red
 
-        let stackView = UIStackView(arrangedSubviews: [lable, imageView])
+        let stackView = UIStackView(arrangedSubviews: [imageView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -40,17 +40,17 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
         
         stackView.setCustomSpacing(10, after: lable)
     
     }
     
-    func configure(with movie: [Movie]) {
-        for m in movie {
-            lable.text = m.title
-        }
+    func configure(with movie: Movie) {
+   
+            lable.text = movie.title
+        
      }
 
     

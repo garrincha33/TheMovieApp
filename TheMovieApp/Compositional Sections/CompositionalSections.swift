@@ -21,14 +21,14 @@ static func topSection() -> NSCollectionLayoutSection {
     let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(300)), subitems: [items])
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .groupPaging
-    section.contentInsets.leading = 8
+    section.contentInsets.leading = 16
     return section
 }
 
 static func bottomSection() -> NSCollectionLayoutSection {
-    let items = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1/2)))
-    items.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 32)
-    let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.70), heightDimension: .absolute(300)), subitems: [items])
+    let items = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/2)))
+    items.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 8)
+    let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.40), heightDimension: .absolute(260)), subitems: [items])
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .groupPaging
     section.contentInsets.leading = 16

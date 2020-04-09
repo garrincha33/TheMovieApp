@@ -10,5 +10,5 @@ import Foundation
 
 protocol ConfigureCell {
     static var reuseIdentifer: String { get }
-    func configure(with movie: [Movie])
+    func configure(with movie: Movie)
 }

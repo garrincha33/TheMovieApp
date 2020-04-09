@@ -21,8 +21,6 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
         UINavigationBar.appearance().prefersLargeTitles = true
         
     }
-    
-    
 
     private func setupTabBarController() {
         viewControllers = [
