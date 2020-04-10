@@ -26,6 +26,12 @@ extension MainController {
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 16
         
+        //step 5 add to top
+        //MARK:-HEADER SETUP----------------TOP
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        section.boundarySupplementaryItems = [layoutSectionHeader]
+        
         return section
     }
     
@@ -40,7 +46,7 @@ extension MainController {
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 16
  
-        //MARK:-HEADER SETUP----------------
+        //MARK:-HEADER SETUP----------------BOTTOM
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         section.boundarySupplementaryItems = [layoutSectionHeader]
@@ -57,7 +63,7 @@ extension MainController {
             }
             switch indexPath.section {
             case 0:
-                sectionHeader.title.text = "Test"
+                sectionHeader.title.text = "Movies Out Now" //step 5 also adjust here for display text
             case 1:
                 sectionHeader.title.text = "Top Rated Movies"
             default:

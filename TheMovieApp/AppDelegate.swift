@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barStyle = UIBarStyle.black
         UINavigationBar.appearance().tintColor = UIColor.rgb(red: 51, green: 212, blue: 128)
         UINavigationBar.appearance().prefersLargeTitles = true
-        
+        //step 2 create a group for fonts
+        //step 3 drag in fonts add to target, adjust plist to add font
         UINavigationBar.appearance().largeTitleTextAttributes =
-            [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Poppins-Light", size: 40)
+            [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Slabo27px-Regular", size: 40)
         ?? UIFont.systemFont(ofSize: 30)]
 
         return true

@@ -15,10 +15,13 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Genre", style: .plain, target: self, action: #selector(testingGenre))
+        
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
         collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-        navigationItem.title = "Movies Out Now"
+        //navigationItem.title = "Movies Out Now"
         navigationController?.navigationBar.prefersLargeTitles = true
         //getMovies()
         setupDiffableDataSource()
@@ -56,6 +59,11 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        return .init(width: view.frame.width, height: 100)
 //
 //    }
+    
+    @objc private func testingGenre() {
+        
+    }
+    
     func configure<T: ConfigureCell>(_ cellType: T.Type, with app: Movie, for indexPath: IndexPath) -> T {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifer, for: indexPath) as? T else {
             fatalError("Unable to dequeue \(cellType)")
