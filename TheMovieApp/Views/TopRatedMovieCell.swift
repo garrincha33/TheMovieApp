@@ -6,20 +6,27 @@
 //  Copyright © 2020 twisted echo. All rights reserved.
 //
 import UIKit
+//step 1 install sdwebimage pod
+import SDWebImage
 
 class TopRatedMovieCell: UICollectionViewCell, ConfigureCell {
     
     static var reuseIdentifer: String = "TopRatedMovieCell"
     
     let lable = UILabel()
-    let imageView = UIImageView()
+    //step 2 create poster image view
+    let posterImage: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .yellow
+        image.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        return image
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        imageView.backgroundColor = .yellow
-        
-        let stackView = UIStackView(arrangedSubviews: [imageView])
+        //step 3 add poster image into stack
+        let stackView = UIStackView(arrangedSubviews: [posterImage])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -40,11 +47,12 @@ class TopRatedMovieCell: UICollectionViewCell, ConfigureCell {
     
     
     
-    
+    //step 4 configure cell with poster image and turn of NSTRANSAPP security
     func configure(with movie: Movie) {
-        //TODO:-
-        
-        
+        let posterPath = movie.poster_path
+        guard let url = URL(string: "\(BASEIMAGEURL)\(posterPath ?? "")") else {return}
+        posterImage.sd_setImage(with: url, completed: nil)
+
     }
     
     

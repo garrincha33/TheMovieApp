@@ -118,7 +118,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     private func setupDiffableDataSource() {
         collectionView.dataSource = diffableDataSource
-        //step 5 call in setup of data source
+
         //MARK:- SetupHeader under Compositional Sections Extension
         setupHeader()
         
