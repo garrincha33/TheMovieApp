@@ -18,7 +18,7 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
 
     private func setupNavBarControllerCustom() {
         
-        UINavigationBar.appearance().prefersLargeTitles = true
+        //UINavigationBar.appearance().prefersLargeTitles = true
         
     }
 
@@ -31,11 +31,15 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
         tabBar.barTintColor = .clear
 
+        //step 1 adjust tab bar items title and image size
         guard let items = tabBar.items else {return}
                for item in items {
-                   item.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -4, right: 0)
+                   item.imageInsets = UIEdgeInsets(top: 18, left: 0, bottom: -8, right: 0)
                }
-
+        guard let titleItems = tabBar.items else {return}
+        for items in titleItems {
+            items.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 14)
+        }
     }
 
     private func setupNavigationControllers(with rootViewController: UIViewController, title: String, image: UIImage) -> UINavigationController {

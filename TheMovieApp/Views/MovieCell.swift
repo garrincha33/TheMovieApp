@@ -34,10 +34,10 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         super.init(frame: frame)
         
         lable.textColor = .yellow
-        lable.font = UIFont.boldSystemFont(ofSize: 14)
+        lable.font = UIFont.boldSystemFont(ofSize: 25)
         
         imageView.backgroundColor = .red
-        //step 5 add into stack
+
         let stackView = UIStackView(arrangedSubviews: [posterImage])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -55,7 +55,7 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         stackView.setCustomSpacing(10, after: lable)
     
     }
-    //step 6 add to configure cell
+
     func configure(with movie: Movie) {
         lable.text = movie.title
         let posterPath = movie.poster_path

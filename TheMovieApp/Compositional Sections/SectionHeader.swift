@@ -26,15 +26,16 @@ class SectionHeader: UICollectionReusableView {
               seperator.backgroundColor = .quaternaryLabel
               
               title.textColor = .white
-              title.font = UIFontMetrics.default.scaledFont(for: UIFont.systemFont(ofSize: 22, weight: .bold))
-              
+        //step 4 add font and use
+              title.font = UIFont(name: "Slabo27px-Regular", size: 15)
+
               let stackView = UIStackView(arrangedSubviews: [title])
               stackView.translatesAutoresizingMaskIntoConstraints = false
               stackView.axis = .vertical
               addSubview(stackView)
               
               NSLayoutConstraint.activate([
-                  stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                  stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
                   stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
               stackView.topAnchor.constraint(equalTo: topAnchor),
               stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
