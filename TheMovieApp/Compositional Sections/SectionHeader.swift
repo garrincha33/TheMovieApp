@@ -6,8 +6,6 @@
 //  Copyright © 2020 twisted echo. All rights reserved.
 //
 
-//step 1 create a section header
-
 import UIKit
 
 class SectionHeader: UICollectionReusableView {

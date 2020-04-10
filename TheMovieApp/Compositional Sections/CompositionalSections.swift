@@ -39,7 +39,7 @@ extension MainController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 16
-        //step 3 add to comp layout
+ 
         //MARK:-HEADER SETUP----------------
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -48,8 +48,7 @@ extension MainController {
         return section
         
     }
-    
-    //step 2 create a function to setup the header
+
     //MARK:- SETUP HEADER FUNCTION
     func setupHeader() {
         diffableDataSource.supplementaryViewProvider = .some({ (collectionView, kind, indexPath) -> UICollectionReusableView? in
