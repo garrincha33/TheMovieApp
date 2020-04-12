@@ -127,9 +127,9 @@
 		1BA357D92435FF720073D94D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1BA357E324368D6B0073D94D /* ConfigureCell.swift */,
 				1BA357E124368C350073D94D /* MovieCell.swift */,
 				1BA357F9243E06100073D94D /* TopRatedMovieCell.swift */,
-				1BA357E324368D6B0073D94D /* ConfigureCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

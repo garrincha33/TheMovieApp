@@ -12,6 +12,8 @@ extension MainController {
     enum Section {
         case topSection
         case bottomSection
+        case popularSection
+        case trendingSection
     }
     
     //MARK:- COMP LAYOUT TOP SECTION---
@@ -25,8 +27,10 @@ extension MainController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 16
-        
-        //step 5 add to top
+        section.contentInsets.bottom = 32
+        section.contentInsets.top = 16
+
+
         //MARK:-HEADER SETUP----------------TOP
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -38,13 +42,15 @@ extension MainController {
     //MARK:- COMP LAYOUT BOTTOM SECTION---
     static func bottomSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1/2)))
-        item.contentInsets = .init(top: 0, leading: 0, bottom: 8, trailing: 32)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 16, trailing: 32)
         
         let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(0.70), heightDimension: .absolute(400)), subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets.leading = 16
+        section.contentInsets.bottom = 32
+        section.contentInsets.top = 16
  
         //MARK:-HEADER SETUP----------------BOTTOM
         let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
@@ -64,14 +70,24 @@ extension MainController {
             switch indexPath.section {
             case 0:
                 sectionHeader.title.text = "Movies Out Now" //step 5 also adjust here for display text
+                //sectionHeader.genre.text = "All Genres"
             case 1:
                 sectionHeader.title.text = "Top Rated Movies"
+                //sectionHeader.genre.text = "All Genres"
+                //step 4 update headers to render
+            case 2:
+                sectionHeader.title.text = "Trending Movies"
+                //sectionHeader.genre.text = "All Genres"
+            case 3:
+                sectionHeader.title.text = "Popular Movies"
+                //sectionHeader.genre.text = "All Genres"
             default:
                 sectionHeader.title.text = "Default"
             }
             return sectionHeader
         })
     }
+
     
 }
 

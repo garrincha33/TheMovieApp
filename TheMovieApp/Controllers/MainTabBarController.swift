@@ -31,7 +31,6 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
         tabBar.barTintColor = .clear
 
-        //step 1 adjust tab bar items title and image size
         guard let items = tabBar.items else {return}
                for item in items {
                    item.imageInsets = UIEdgeInsets(top: 18, left: 0, bottom: -8, right: 0)

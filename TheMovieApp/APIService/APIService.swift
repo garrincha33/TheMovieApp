@@ -69,6 +69,18 @@ class APIService {
         fetchAppGroup(urlString: urlString, completion: completion)
     }
     
+    //step 2 add extra API helper calls
+    
+    func fetchTrendingMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
+        let urlString = APITRENDING
+        fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
+    func fetchPopularMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
+        let urlString = APIPOPULAR
+        fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         
         guard let url = URL(string: urlString) else { return }

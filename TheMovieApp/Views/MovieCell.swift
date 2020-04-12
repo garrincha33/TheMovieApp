@@ -29,6 +29,13 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         image.heightAnchor.constraint(equalToConstant: 150).isActive = true
         return image
     }()
+    
+    let genreButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("All Genre", for: .normal)
+        button.titleColor(for: .normal)
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,6 +60,13 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         ])
         
         stackView.setCustomSpacing(10, after: lable)
+        
+        contentView.addSubview(genreButton)
+        NSLayoutConstraint.activate([
+            genreButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            genreButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 20),
+            genreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
     
     }
 
