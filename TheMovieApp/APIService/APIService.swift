@@ -64,6 +64,11 @@ class APIService {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
+    func fetchPlayingNowMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
+        let urlString = APINOWPLAYING
+        fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
     func fetchTopMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
         let urlString = APITOPRATED
         fetchAppGroup(urlString: urlString, completion: completion)

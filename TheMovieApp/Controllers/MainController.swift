@@ -9,25 +9,25 @@
 import UIKit
 
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Select Genre", style: .plain, target: self, action: #selector(testingGenre))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Select Genre", style: .plain, target: self, action: #selector(testingGenre))
         
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
-        collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-
+//        collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         //getMovies()
         setupDiffableDataSource()
-
+        
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
-
-
+        
+        
     }
-
+    
     init() {
         //MARK:- compostional layout
         let layout = UICollectionViewCompositionalLayout { (sectionNumber, _) -> NSCollectionLayoutSection? in
@@ -43,7 +43,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     @objc private func testingGenre() {
         
     }
@@ -55,7 +55,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         cell.configure(with: app)
         return cell
     }
-
+    
     //MARK:- steup diffable datasource
     lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, AnyHashable> = .init(collectionView: collectionView) {(collectionView, indexPath, object) -> UICollectionViewCell? in
         
@@ -65,51 +65,47 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
                 cell.configure(with: obj)
                 return cell
-                //BOTTOM SECTION
-            case 1:
-                let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: TopRatedMovieCell.reuseIdentifer, for: indexPath) as! TopRatedMovieCell
-                cell.configure(with: obj)
-                return cell
             default:
-                
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
                 cell.configure(with: obj)
                 return cell
                 
-                }
             }
-        return nil
         }
+        return nil
+    }
     
     private func setupDiffableDataSource() {
         collectionView.dataSource = diffableDataSource
-
+        
         //MARK:- SetupHeader under Compositional Sections Extension
         setupHeader()
         
         //step 1 add extra API calls
-        APIService.shared.fetchMovies { (movies, err) in
+        APIService.shared.fetchPlayingNowMovies { (playingNowGroup, err) in
             APIService.shared.fetchTopMovies { (movieGroup, err) in
                 APIService.shared.fetchTrendingMovies { (trendingGroup, err) in
                     APIService.shared.fetchPopularMovies { (popularGroup, err) in
-                
-                var snapshot = self.diffableDataSource.snapshot()
+                        
+                        var snapshot = self.diffableDataSource.snapshot()
                         snapshot.appendSections([.topSection, .bottomSection, .trendingSection, .popularSection])
                         
-                //MARK:- movies out now
-                snapshot.appendItems(movies ?? [], toSection: .topSection)
-                //MARK:- top rated movies
-                let objects = movieGroup?.results ?? []
-                snapshot.appendItems(objects, toSection: .bottomSection)
+                        //MARK:- movies out now
+                        let playingNowObjects = playingNowGroup?.results ?? []
+                        snapshot.appendItems(playingNowObjects, toSection: .topSection)
+
+                        //MARK:- top rated movies
+                        let objects = movieGroup?.results ?? []
+                        snapshot.appendItems(objects, toSection: .bottomSection)
                         //step 3 add extra API helper calls to render
-                //MARK:- trending movies
-                let trendingObjects = trendingGroup?.results ?? []
-                snapshot.appendItems(trendingObjects, toSection: .trendingSection)
-                //MARK:- popular movies
-                let popularObjects = popularGroup?.results ?? []
+                        //MARK:- trending movies
+                        let trendingObjects = trendingGroup?.results ?? []
+                        snapshot.appendItems(trendingObjects, toSection: .trendingSection)
+                        //MARK:- popular movies
+                        let popularObjects = popularGroup?.results ?? []
                         snapshot.appendItems(popularObjects, toSection: .popularSection)
-                self.diffableDataSource.apply(snapshot)
-                     
+                        
+                        self.diffableDataSource.apply(snapshot)
                         
                     }
                 }
@@ -123,7 +119,7 @@ struct MainPreview: PreviewProvider {
     static var previews: some View {
         ContainerView().edgesIgnoringSafeArea(.all)
     }
-
+    
     struct ContainerView: UIViewControllerRepresentable {
         
         func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> UIViewController {
