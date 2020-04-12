@@ -10,23 +10,19 @@ import UIKit
 
 class MainController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-   // var movies = [Movie]()
-//    var topMovies = [Movie]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Genre", style: .plain, target: self, action: #selector(testingGenre))
+         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Select Genre", style: .plain, target: self, action: #selector(testingGenre))
         
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
         collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-        //navigationItem.title = "Movies Out Now"
+
         navigationController?.navigationBar.prefersLargeTitles = true
         //getMovies()
         setupDiffableDataSource()
-        
-        //HEADER  //step 4 register the header
+
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
 
 
@@ -48,18 +44,6 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         fatalError("init(coder:) has not been implemented")
     }
 
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//        return movies.count
-//
-//    }
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return .init(width: view.frame.width, height: 100)
-//
-//    }
-    
     @objc private func testingGenre() {
         
     }
@@ -72,33 +56,6 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return cell
     }
 
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
-//        cell.item = movies[indexPath.row]
-//        return cell
-//
-//        //return configure(MovieCell.self, with: movies, for: indexPath)
-//
-//    }
-
-//    private func getMovies() {
-//        APIService.shared.fetchMovies(completionHandler: { (movie, err) in
-//
-//            if let err = err {
-//                print("unable to getch mopvies",err)
-//            }
-//
-//            guard let moviess = movie else {return}
-//            for _ in moviess {
-//                self.movies = moviess
-//                DispatchQueue.main.async {
-//                    self.collectionView.reloadData()
-//                    }
-//                }
-//            })
-//        }
-  
     //MARK:- steup diffable datasource
     lazy var diffableDataSource: UICollectionViewDiffableDataSource<Section, AnyHashable> = .init(collectionView: collectionView) {(collectionView, indexPath, object) -> UICollectionViewCell? in
         
@@ -130,19 +87,32 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //MARK:- SetupHeader under Compositional Sections Extension
         setupHeader()
         
+        //step 1 add extra API calls
         APIService.shared.fetchMovies { (movies, err) in
-
             APIService.shared.fetchTopMovies { (movieGroup, err) in
+                APIService.shared.fetchTrendingMovies { (trendingGroup, err) in
+                    APIService.shared.fetchPopularMovies { (popularGroup, err) in
                 
                 var snapshot = self.diffableDataSource.snapshot()
-                snapshot.appendSections([.topSection])
+                        snapshot.appendSections([.topSection, .bottomSection, .trendingSection, .popularSection])
+                        
+                //MARK:- movies out now
                 snapshot.appendItems(movies ?? [], toSection: .topSection)
-
-                snapshot.appendSections([.bottomSection])
+                //MARK:- top rated movies
                 let objects = movieGroup?.results ?? []
                 snapshot.appendItems(objects, toSection: .bottomSection)
-                
+                        //step 3 add extra API helper calls to render
+                //MARK:- trending movies
+                let trendingObjects = trendingGroup?.results ?? []
+                snapshot.appendItems(trendingObjects, toSection: .trendingSection)
+                //MARK:- popular movies
+                let popularObjects = popularGroup?.results ?? []
+                        snapshot.appendItems(popularObjects, toSection: .popularSection)
                 self.diffableDataSource.apply(snapshot)
+                     
+                        
+                    }
+                }
             }
         }
     }

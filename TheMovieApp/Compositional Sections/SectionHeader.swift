@@ -12,6 +12,7 @@ class SectionHeader: UICollectionReusableView {
     
     static let reuseIdentifier = "SectionHeader"
     var title = UILabel()
+    var genre = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,23 +27,24 @@ class SectionHeader: UICollectionReusableView {
               seperator.backgroundColor = .quaternaryLabel
               
               title.textColor = .white
-        //step 4 add font and use
-              title.font = UIFont(name: "Slabo27px-Regular", size: 15)
+              title.font = UIFont(name: "Slabo27px-Regular", size: 24)
 
               let stackView = UIStackView(arrangedSubviews: [title])
               stackView.translatesAutoresizingMaskIntoConstraints = false
               stackView.axis = .vertical
+              stackView.distribution = .fillEqually
               addSubview(stackView)
               
               NSLayoutConstraint.activate([
-                  stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+                  stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
                   stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
               stackView.topAnchor.constraint(equalTo: topAnchor),
               stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
               
               ])
               
-              stackView.setCustomSpacing(15, after: seperator)
+              stackView.setCustomSpacing(35, after: title)
+
     }
     
     required init?(coder: NSCoder) {
