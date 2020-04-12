@@ -43,7 +43,7 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
         lable.textColor = .yellow
         lable.font = UIFont.boldSystemFont(ofSize: 25)
         
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .clear
 
         let stackView = UIStackView(arrangedSubviews: [posterImage])
         stackView.translatesAutoresizingMaskIntoConstraints = false

@@ -25,7 +25,11 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
     private func setupTabBarController() {
         viewControllers = [
             setupNavigationControllers(with: MainController(), title: "Movies", image: #imageLiteral(resourceName: "movieFeature")),
-            setupNavigationControllers(with: UIViewController(), title: "Search", image: #imageLiteral(resourceName: "movieSearch1"))
+            setupNavigationControllers(with: UIViewController(), title: "TV Shows", image: #imageLiteral(resourceName: "tv")),
+            setupNavigationControllers(with: UIViewController(), title: "Search", image: #imageLiteral(resourceName: "movieSearch1")),
+            setupNavigationControllers(with: UIViewController(), title: "Profile", image: #imageLiteral(resourceName: "profile"))
+            
+
 
         ]
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
@@ -33,7 +37,7 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
 
         guard let items = tabBar.items else {return}
                for item in items {
-                   item.imageInsets = UIEdgeInsets(top: 18, left: 0, bottom: -8, right: 0)
+                   item.imageInsets = UIEdgeInsets(top: 16, left: 0, bottom: -8, right: 0)
                }
         guard let titleItems = tabBar.items else {return}
         for items in titleItems {
