@@ -24,7 +24,7 @@ class MovieCell: UICollectionViewCell, ConfigureCell {
     //step 5 create poster image
     let posterImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .yellow
+        image.backgroundColor = .clear
         image.widthAnchor.constraint(equalToConstant: 150).isActive = true
         image.heightAnchor.constraint(equalToConstant: 150).isActive = true
         return image

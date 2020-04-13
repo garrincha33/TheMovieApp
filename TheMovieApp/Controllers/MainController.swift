@@ -17,10 +17,8 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseIdentifer)
-//        collectionView.register(TopRatedMovieCell.self, forCellWithReuseIdentifier: TopRatedMovieCell.reuseIdentifer)
-        
         navigationController?.navigationBar.prefersLargeTitles = true
-        //getMovies()
+        
         setupDiffableDataSource()
         
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
@@ -69,7 +67,6 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseIdentifer, for: indexPath) as! MovieCell
                 cell.configure(with: obj)
                 return cell
-                
             }
         }
         return nil
@@ -80,8 +77,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         //MARK:- SetupHeader under Compositional Sections Extension
         setupHeader()
-        
-        //step 1 add extra API calls
+
         APIService.shared.fetchPlayingNowMovies { (playingNowGroup, err) in
             APIService.shared.fetchTopMovies { (movieGroup, err) in
                 APIService.shared.fetchTrendingMovies { (trendingGroup, err) in
@@ -93,11 +89,9 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                         //MARK:- movies out now
                         let playingNowObjects = playingNowGroup?.results ?? []
                         snapshot.appendItems(playingNowObjects, toSection: .topSection)
-
                         //MARK:- top rated movies
                         let objects = movieGroup?.results ?? []
                         snapshot.appendItems(objects, toSection: .bottomSection)
-                        //step 3 add extra API helper calls to render
                         //MARK:- trending movies
                         let trendingObjects = trendingGroup?.results ?? []
                         snapshot.appendItems(trendingObjects, toSection: .trendingSection)
@@ -110,6 +104,16 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     }
                 }
             }
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let object = diffableDataSource.itemIdentifier(for: indexPath)
+        if let object = object as? Movie {
+            let controller = MovieDetailsController(movieId: object.id ?? 0)
+            print("Movie is \(object.title ?? "")")
+            navigationController?.pushViewController(controller, animated: true)
+
         }
     }
 }

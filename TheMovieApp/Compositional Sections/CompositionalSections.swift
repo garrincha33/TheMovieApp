@@ -74,7 +74,6 @@ extension MainController {
             case 1:
                 sectionHeader.title.text = "Top Rated"
                 //sectionHeader.genre.text = "All Genres"
-                //step 4 update headers to render
             case 2:
                 sectionHeader.title.text = "Trending "
                 //sectionHeader.genre.text = "All Genres"
