@@ -28,9 +28,6 @@ class MainTabBarController: UITabBarController, UICollectionViewDelegate, UIColl
             setupNavigationControllers(with: UIViewController(), title: "TV Shows", image: #imageLiteral(resourceName: "tv")),
             setupNavigationControllers(with: UIViewController(), title: "Search", image: #imageLiteral(resourceName: "movieSearch1")),
             setupNavigationControllers(with: UIViewController(), title: "Profile", image: #imageLiteral(resourceName: "profile"))
-            
-
-
         ]
         tabBar.tintColor = UIColor.rgb(red: 144, green: 202, blue: 19)
         tabBar.barTintColor = .clear
