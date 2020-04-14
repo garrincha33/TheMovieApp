@@ -106,7 +106,7 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
         }
     }
-    
+    //Step 6 transiti9on over to your movie details controller by movie id
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let object = diffableDataSource.itemIdentifier(for: indexPath)
         if let object = object as? Movie {

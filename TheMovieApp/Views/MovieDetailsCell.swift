@@ -8,6 +8,7 @@
 
 import UIKit
 
+//STEP 2 create a movie details cell, this will hold all of our info
 class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
     
     static var reuseIdentifer: String = "MovieDetailsCell"
@@ -27,5 +28,7 @@ class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
     func configure(with movie: Movie) {
         ////TODO
     }
+    
+
     
 }
