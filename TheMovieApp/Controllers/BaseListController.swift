@@ -10,8 +10,8 @@ import UIKit
 
 class BaseListController: UICollectionViewController {
     
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    init() {//step 3 plug it into your init
+        super.init(collectionViewLayout: StretchyHeaderLayout())
     }
     
     required init?(coder aDecoder: NSCoder) {
