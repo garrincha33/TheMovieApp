@@ -8,16 +8,29 @@
 
 import UIKit
 
-//STEP 2 create a movie details cell, this will hold all of our info
 class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
     
     static var reuseIdentifer: String = "MovieDetailsCell"
+    
+    let movieTitleLable: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .white
+        lable.text = "Movie Title"
+        lable.font = UIFont.boldSystemFont(ofSize: 20)
+        return lable
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-
-        
+        addSubview(movieTitleLable)
+        movieTitleLable.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            movieTitleLable.topAnchor.constraint(equalTo: topAnchor),
+            movieTitleLable.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            movieTitleLable.trailingAnchor.constraint(equalTo: trailingAnchor),
+            movieTitleLable.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 250)
+        ])
     }
     
     required init?(coder: NSCoder) {
@@ -26,9 +39,7 @@ class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
     
     
     func configure(with movie: Movie) {
-        ////TODO
+        movieTitleLable.text = movie.title
     }
-    
 
-    
 }
