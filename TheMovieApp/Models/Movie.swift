@@ -17,5 +17,5 @@ struct Movie: Codable, Hashable {
     var title: String?
     var release_date: String?
     var rating: Double?
-    var overView: String?
+    var overview: String?
 }
