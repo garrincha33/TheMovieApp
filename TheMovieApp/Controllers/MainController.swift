@@ -74,10 +74,9 @@ class MainController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     private func setupDiffableDataSource() {
         collectionView.dataSource = diffableDataSource
-        
         //MARK:- SetupHeader under Compositional Sections Extension
         setupHeader()
-
+        
         APIService.shared.fetchPlayingNowMovies { (playingNowGroup, err) in
             APIService.shared.fetchTopMovies { (movieGroup, err) in
                 APIService.shared.fetchTrendingMovies { (trendingGroup, err) in

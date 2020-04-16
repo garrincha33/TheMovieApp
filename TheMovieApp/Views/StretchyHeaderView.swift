@@ -7,20 +7,18 @@
 //
 
 import UIKit
+import SDWebImage
 
 class StretchyHeaderView: UICollectionReusableView {
     
-    
-    //step 2 create an imageView for a dummy image
-    
-    let imageView: UIImageView = {
+    static let reuseIdentifier = "StretchyHeaderView"
+
+    var imageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "dummyheader"))
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
  

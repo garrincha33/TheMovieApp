@@ -14,7 +14,7 @@ class MovieDetailsController: BaseListController, UICollectionViewDelegateFlowLa
     let headerId = "headerId"
     fileprivate let padding: CGFloat = 16
     fileprivate let movieId: Int
-    
+
     var movie: Movie?
 
     init(movieId: Int) {
@@ -25,7 +25,7 @@ class MovieDetailsController: BaseListController, UICollectionViewDelegateFlowLa
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = UIColor.rgb(red: 20, green: 20, blue: 20)
         collectionView.register(MovieDetailsCell.self, forCellWithReuseIdentifier: MovieDetailsCell.reuseIdentifer)
-        collectionView.register(StretchyHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(StretchyHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: StretchyHeaderView.reuseIdentifier)
         collectionView.contentInsetAdjustmentBehavior = .never
     }
 
@@ -37,21 +37,16 @@ class MovieDetailsController: BaseListController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupCollectionViewLayout()
         setupCollectionView()
         fetchMovieDetails()
-
     }
     
     fileprivate func fetchMovieDetails() {
         let urlString = "https://api.themoviedb.org/3/movie/\(movieId)?api_key=\(APIKEY)&language=en-US"
         APIService.shared.fetchGenericJSONData(urlString: urlString) { (result: Movie?, err) in
-            
             self.movie = result
-            print("Fetch Movie \(self.movieId)")
-            print("Fetch Movie Name \(self.movie?.title ?? "")")
-            print("FROM - \(urlString)")
+            print("movie details \(self.movie?.overview ?? "")")
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -64,7 +59,6 @@ class MovieDetailsController: BaseListController, UICollectionViewDelegateFlowLa
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: MovieDetailsCell.reuseIdentifer, for: indexPath) as! MovieDetailsCell
-        
         if let movie = movie {
             cell.configure(with: movie)
             return cell
@@ -73,17 +67,16 @@ class MovieDetailsController: BaseListController, UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 2 * padding, height: 50)
+        return .init(width: view.frame.width - 2 * padding, height: 350)
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: StretchyHeaderView.reuseIdentifier, for: indexPath)
         return header
-        
     }
     
     func configure<T: ConfigureCell>(_ cellType: T.Type, with app: Movie, for indexPath: IndexPath) -> T {
