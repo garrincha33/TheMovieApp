@@ -64,6 +64,10 @@ class APIService {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
+    func fetchCastGroup(urlString: String, completion: @escaping (CastResults?, Error?) -> Void) {
+        fetchGenericJSONData(urlString: urlString, completion: completion)
+    }
+    
     func fetchPlayingNowMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
         let urlString = APINOWPLAYING
         fetchAppGroup(urlString: urlString, completion: completion)
@@ -84,6 +88,11 @@ class APIService {
     func fetchPopularMovies(completion: @escaping (MoviesAPI?, Error?) -> ()) {
         let urlString = APIPOPULAR
         fetchAppGroup(urlString: urlString, completion: completion)
+    }
+    
+    func fetchCast(completion: @escaping (CastResults?, Error?) -> ()) {
+        let urlString = CASTAPI
+        fetchCastGroup(urlString: urlString, completion: completion)
     }
     
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {

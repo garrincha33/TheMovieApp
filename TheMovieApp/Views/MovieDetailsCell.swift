@@ -9,9 +9,29 @@
 import UIKit
 import SDWebImage
 
-class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
-    
+class MovieDetailsCell: UICollectionViewCell {
+
     static var reuseIdentifer: String = "MovieDetailsCell"
+    
+    var castItems: Cast! {
+        didSet {
+            castNameLable.text = castItems.name
+            //let posterPath = castItems.profile_path
+            guard let url = URL(string: "\(BASEPROFILEIMAGE)") else {return}
+            imageView.sd_setImage(with: url, completed: nil)
+        }
+    }
+    
+    var movieItems: Movie! {
+        didSet {
+            movieTitleLable.text = movieItems.title
+            movieDetails.text = movieItems.overview
+            let posterPath = movieItems.poster_path
+            guard let url = URL(string: "\(BASEIMAGEURL)\(posterPath ?? "")") else {return}
+            imageView.sd_setImage(with: url, completed: nil)
+        }
+    }
+
     
     let movieTitleLable: UILabel = {
         let lable = UILabel()
@@ -29,6 +49,15 @@ class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
         tv.font = UIFont.boldSystemFont(ofSize: 14)
         tv.numberOfLines = 0
         return tv
+    }()
+    
+    let castNameLable: UILabel = {
+        let lable = UILabel()
+        lable.textColor = .yellow
+        lable.text = "Cast Names"
+        lable.font = UIFont.boldSystemFont(ofSize: 18)
+        lable.numberOfLines = 0
+        return lable
     }()
     
     let imageView: UIImageView = {
@@ -54,7 +83,7 @@ class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
         movieDetailsStackView.distribution = .equalSpacing
         contentView.addSubview(movieDetailsStackView)
         
-        let overallStackView = UIStackView(arrangedSubviews: [titleStackView, movieDetailsStackView, UIView(), UIView()])
+        let overallStackView = UIStackView(arrangedSubviews: [titleStackView, movieDetailsStackView, UIView(), UIView(), castNameLable])
         overallStackView.translatesAutoresizingMaskIntoConstraints = false
         overallStackView.axis = .vertical
 
@@ -76,12 +105,12 @@ class MovieDetailsCell: UICollectionViewCell, ConfigureCell {
     }
     
     
-    func configure(with movie: Movie) {
+        func configure(with movie: Movie) {
         movieTitleLable.text = movie.title
         movieDetails.text = movie.overview
         let posterPath = movie.poster_path
         guard let url = URL(string: "\(BASEIMAGEURL)\(posterPath ?? "")") else {return}
         imageView.sd_setImage(with: url, completed: nil)
-    }
+        }
 
 }
