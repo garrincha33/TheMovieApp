@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class TopRatedMovieCell: UICollectionViewCell, ConfigureCell {
-    
+
     static var reuseIdentifer: String = "TopRatedMovieCell"
     
     let lable = UILabel()
